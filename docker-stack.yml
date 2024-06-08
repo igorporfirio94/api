@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  api:
+    image: meta-chatbot-api:latest
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    networks:
+      - network_public
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=network_public"
+        - "traefik.http.routers.api.rule=Host(`meta.i4ai.com.br`)"
+        - "traefik.http.routers.api.entrypoints=websecure"
+        - "traefik.http.routers.api.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.api.loadbalancer.server.port=5000"
+
+networks:
+  network_public:
+    external: true
+    attachable: true
+    name: network_public
