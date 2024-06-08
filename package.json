@@ -1,0 +1,15 @@
+{
+  "name": "meta-chatbot-api",
+  "version": "1.0.0",
+  "description": "API para integração com WhatsApp e Chatwoot",
+  "main": "api/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node api/app.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  }
+}
